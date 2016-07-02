@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>test</title>
+		<style type="text/css">
+			#test{
+				width: 102px; 
+				height: 78px;
+				margin: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<img src="user-64.png" />
+			<img src="user-64.png" />
+			<img src="user-64.png" />
+		</div>
+		<div id="test"></div>
+		<script type="text/javascript" src="../build/main.js"></script>
+		<script type="text/javascript">
+			var a = Animation(),
+				b = Animation(),
+				imgUrl = "rabbit-big.png",
+				pos = ["0px -854px", "-174px -852px", "-349px -852px", "-524px -852px", "-698px -852px", "-873px -848px"],
+				images = [
+				"https://sfault-avatar.b0.upaiyun.com/428/707/428707062-577082350e45e_big64",
+				"https://sfault-avatar.b0.upaiyun.com/212/692/2126928047-549a0fc27ae91_big64",
+				"https:///a.png"
+				],
+				flag = false,
+				imgs = document.getElementById("container").getElementsByTagName("img"),
+				test = document.getElementById("test");
+			a.loadImage(images, (src, i) => {
+				imgs[i].src = src;
+			}).then(function () {
+				a.dispose();
+			});
+			a.start(80);
+			b.loadImage([imgUrl], (src) => {
+				test.style.background = "url(" + src + ")";
+			}).changePosition(test, pos, imgUrl).repeat();
+			b.start(80);
+			test.onclick = function () {
+				if (!flag) {
+					flag = true;
+					b.pause();
+				} else {
+					flag = false;
+					b.restart();
+				}
+			};
+		</script>
+	</body>
+</html>
